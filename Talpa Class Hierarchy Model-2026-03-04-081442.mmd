@@ -1,0 +1,58 @@
+classDiagram
+direction TB
+    class Buca {
+	    -Boolean occupata
+	    +Buca(occupata)
+	    +resetBuca()
+    }
+
+    class Gestore {
+	    -String difficoltà
+	    -int tempoRimanente
+	    -ArrayList ListaBuche
+	    +Gestore(String difficoltà, int tempoRimanente)
+	    +AvviaTimer()
+	    +FinePartita()
+    }
+
+    class Giocatore {
+	    -int punteggio
+	    -String nome
+	    +Giocatore(int punteggio,String nome)
+	    +IncrementaPunteggio()
+    }
+
+    class Classifica {
+	    -String fileSalvataggio
+	    +Classifica(fileSalvataggio)
+	    +salvaRecord()
+    }
+
+    class `Talpa bomba` {
+	    +Talpa bomba()
+    }
+
+    class Talpa {
+	    #int punteggio
+	    #String tipo
+	    +Talpa(String tipo)
+	    +Apparire()
+	    +Scomparire()
+    }
+
+    class `Talpa oro` {
+	    +Talpa oro()
+    }
+
+    class Interfaccia {
+	    +Interfaccia()
+    }
+
+    Gestore *-- Buca
+    Gestore *-- Giocatore
+    Gestore --> Classifica
+    Talpa <|-- `Talpa oro`
+    Talpa <|-- `Talpa bomba`
+    Buca o-- Talpa
+    Gestore -- Interfaccia
+    Interfaccia -- Buca
