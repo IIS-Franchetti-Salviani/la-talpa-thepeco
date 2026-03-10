@@ -10,4 +10,24 @@ package gioco.schiacciabuldog;
  */
 public class Bulldog {
     
+    protected int punteggio;
+    protected String tipo;
+
+    public Bulldog(String tipo) 
+    {
+        this.tipo = tipo;
+        this.punteggio = 10; // Valore base
+    }
+    public void apparire() 
+    { 
+        
+    }
+    public void scomparire() 
+    { 
+        
+    }
+    public int getPunteggio() 
+    { 
+        return punteggio; 
+    }
 }

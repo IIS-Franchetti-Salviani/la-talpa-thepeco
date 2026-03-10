@@ -8,6 +8,10 @@ package gioco.schiacciabuldog;
  *
  * @author pecorelli.davide
  */
-public class BulldogBomba {
+public class BulldogBomba extends Bulldog{
     
+    public BulldogBomba() {
+        super("BOMBA");
+        this.punteggio = -20; 
+    }
 }

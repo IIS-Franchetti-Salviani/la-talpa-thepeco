@@ -10,4 +10,34 @@ package gioco.schiacciabuldog;
  */
 public class Buca {
     
+    private boolean occupata;
+    private Bulldog BulldogContenuto;
+
+    public Buca() 
+    { 
+        this.occupata = false; 
+    }
+
+    public void setBulldog(Bulldog t) 
+    {
+        this.BulldogContenuto = t;
+        this.occupata = true;
+    }
+
+    public void resetBuca() 
+    {
+        this.occupata = false;
+        this.BulldogContenuto = null;
+    }
+
+    public boolean isOccupata() 
+    { 
+        return occupata;
+    
+    }
+    public Bulldog getTalpa() 
+    { 
+        return BulldogContenuto;
+    }
 }
+

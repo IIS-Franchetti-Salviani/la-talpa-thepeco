@@ -10,4 +10,22 @@ package gioco.schiacciabuldog;
  */
 public class Giocatore {
     
+    private int punteggio;
+    private String nome;
+
+    public Giocatore(String nome) 
+    {
+        this.nome = nome;
+        this.punteggio = 0;
+    }
+
+    public void incrementaPunteggio(int punti)
+    { 
+        this.punteggio += punti;
+    }
+    
+    public int getPunteggio() 
+    { 
+        return punteggio;
+    }
 }
