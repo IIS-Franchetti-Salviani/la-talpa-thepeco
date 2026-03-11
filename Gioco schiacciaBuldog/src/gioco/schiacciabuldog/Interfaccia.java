@@ -3,10 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package gioco.schiacciabuldog;
+
+import java.awt.Image;
 import javax.swing.Timer;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Davide
@@ -20,29 +24,23 @@ public class Interfaccia extends javax.swing.JFrame {
     private int tempoRimanente = 30; // TIMER DI 30 SECONDI
     private Timer timerMovimento;
     private Timer timerPartita;
-    
-    
+
     public Interfaccia() {
-        
+
         initComponents();
-         
-        
-        
-         player = new Giocatore("Utente");
-        
+
+        player = new Giocatore("Utente");
+
         // Timer per muovere la talpa ogni secondo
         timerMovimento = new Timer(1000, e -> muoviTalpa());
         timerMovimento.start();
-        
+
         // Timer per il countdown della partita
         timerPartita = new Timer(1000, e -> gestisciTempo());
-        timerPartita.start(); 
+        timerPartita.start();
     }
-    
 
-    
-
-        private void muoviTalpa() {
+    private void muoviTalpa() {
         bucaAttiva = random.nextInt(4) + 1;
         TALPA.setText("TALPA!");
         TALPA.setVisible(true);
@@ -50,12 +48,16 @@ public class Interfaccia extends javax.swing.JFrame {
         // POSIZIONAMENTO SOPRA I BOTTONI
         JButton btnTarget;
         switch (bucaAttiva) {
-            case 1 -> btnTarget = Buca1;
-            case 2 -> btnTarget = Buca2;
-            case 3 -> btnTarget = Buca3;
-            default -> btnTarget = Buca4;
+            case 1 ->
+                btnTarget = Buca1;
+            case 2 ->
+                btnTarget = Buca2;
+            case 3 ->
+                btnTarget = Buca3;
+            default ->
+                btnTarget = Buca4;
         }
-        
+
         // Calcola la posizione: X uguale al bottone, Y un po' più in alto (-40)
         int xCentrata = btnTarget.getX() + (btnTarget.getWidth() / 2) - (TALPA.getWidth() / 2);
         // Y = y del bottone + (metà altezza bottone) - (metà altezza label)
@@ -63,16 +65,30 @@ public class Interfaccia extends javax.swing.JFrame {
 
         TALPA.setLocation(xCentrata, yCentrata);
         TALPA.setVisible(true);
-    
-    
-    this.getContentPane().setComponentZOrder(TALPA, 0);
-    this.getContentPane().repaint();
+
+        this.getContentPane().setComponentZOrder(TALPA, 0);
+        this.getContentPane().repaint();
     }
+    
+    private void aggiornaImmagineLabel() 
+    {
         
-        private void gestisciTempo() {
+    Image img = new ImageIcon("buca.png").getImage();
+    Image imgRiscalata = img.getScaledInstance(TALPA.getWidth(), TALPA.getHeight(), Image.SCALE_SMOOTH);
+    TALPA.setIcon(new ImageIcon(imgRiscalata));
+    
+    getContentPane().setComponentZOrder(TALPA, 0);
+    getContentPane().setComponentZOrder(Buca1, 1);
+    getContentPane().setComponentZOrder(Buca2, 1);
+    getContentPane().setComponentZOrder(Buca3, 1);
+    getContentPane().setComponentZOrder(Buca4, 1);
+    getContentPane().repaint();
+}
+
+    private void gestisciTempo() {
         tempoRimanente--;
         lblTimer.setText("Tempo: " + tempoRimanente + "s");
-        
+
         if (tempoRimanente <= 0) {
             timerMovimento.stop();
             timerPartita.stop();
@@ -82,7 +98,7 @@ public class Interfaccia extends javax.swing.JFrame {
     }
 
     private void gestisciColpo(int indice) {
-        
+
         if (indice == bucaAttiva && TALPA.isVisible()) {
             player.incrementaPunteggio(10);
             lblPunteggio.setText("Punti: " + player.getPunteggio());
@@ -105,22 +121,22 @@ public class Interfaccia extends javax.swing.JFrame {
 
         jButton1.setText("jButton1");
 
-        setLayout(null);
+        getContentPane().setLayout(null);
 
         Buca4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Buca4ActionPerformed(evt);
             }
         });
-        add(Buca4);
-        Buca4.setBounds(420, 260, 160, 110);
+        getContentPane().add(Buca4);
+        Buca4.setBounds(420, 270, 160, 110);
 
         Buca3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Buca3ActionPerformed(evt);
             }
         });
-        add(Buca3);
+        getContentPane().add(Buca3);
         Buca3.setBounds(120, 260, 160, 110);
 
         Buca1.addActionListener(new java.awt.event.ActionListener() {
@@ -128,38 +144,37 @@ public class Interfaccia extends javax.swing.JFrame {
                 Buca1ActionPerformed(evt);
             }
         });
-        add(Buca1);
+        getContentPane().add(Buca1);
         Buca1.setBounds(120, 80, 160, 110);
 
-        TALPA.setText("TALPA");
-        add(TALPA);
-        TALPA.setBounds(330, 210, 50, 40);
+        TALPA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gioco/schiacciabuldog/talpabulldoggona.png"))); // NOI18N
+        getContentPane().add(TALPA);
+        TALPA.setBounds(-50, 190, 340, 200);
 
         Buca2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Buca2ActionPerformed(evt);
             }
         });
-        add(Buca2);
+        getContentPane().add(Buca2);
         Buca2.setBounds(420, 80, 160, 110);
-        add(lblPunteggio);
+        getContentPane().add(lblPunteggio);
         lblPunteggio.setBounds(120, 520, 80, 16);
-        add(lblTimer);
+        getContentPane().add(lblTimer);
         lblTimer.setBounds(130, 590, 0, 0);
     }// </editor-fold>//GEN-END:initComponents
-    
-    
+
     int punti = 0;
-    
+
     private void Buca2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buca2ActionPerformed
         if (bucaAttiva == 1) {
             gestisciColpo(2);
-                    
+
         }
     }//GEN-LAST:event_Buca2ActionPerformed
 
     private void Buca1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buca1ActionPerformed
-         if (bucaAttiva == 1) {
+        if (bucaAttiva == 1) {
             gestisciColpo(1);
         }
     }//GEN-LAST:event_Buca1ActionPerformed
@@ -171,13 +186,10 @@ public class Interfaccia extends javax.swing.JFrame {
     }//GEN-LAST:event_Buca3ActionPerformed
 
     private void Buca4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buca4ActionPerformed
-         if (bucaAttiva == 1) {
+        if (bucaAttiva == 1) {
             gestisciColpo(4);
         }
     }//GEN-LAST:event_Buca4ActionPerformed
-
-
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
